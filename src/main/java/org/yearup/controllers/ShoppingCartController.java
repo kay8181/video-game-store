@@ -33,7 +33,7 @@ public class ShoppingCartController
     }
 
     // each method in this controller requires a Principal object as a parameter
-    @GetMapping("/cart/user")
+    @GetMapping("")
     @PreAuthorize("hasRole('ROLE_USER')")
     public ShoppingCart getCart(Principal principal)
     {
@@ -50,7 +50,7 @@ public class ShoppingCartController
     // add a POST method to add a product to the cart - the url should be
     // https://localhost:8080/cart/products/15  (15 is the productId to be added)
     // return the updated cart with status 201 Created
-    @PostMapping("/cart/products/{id}")
+    @PostMapping("/products/{id}")
     @PreAuthorize("hasRole('ROLE_USER')")
     public ShoppingCart addToCart(Principal principal, @PathVariable int id, @RequestBody ShoppingCart shoppingCart)
     {

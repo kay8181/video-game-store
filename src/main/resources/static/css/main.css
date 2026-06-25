@@ -7,9 +7,9 @@ header
     height: 10vh;
 
     padding: 5px 15px;
-    border-bottom: solid 1px #00ff41;
-    box-shadow: 5px 2px #00ff41;
-    background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+    border-bottom: solid 1px #41d2ec;
+    box-shadow: 5px 2px #41d2ec;
+    background: linear-gradient(135deg, #06023f, #1a1a1a);
 }
 
 header img
@@ -37,7 +37,7 @@ header a {
 }
 
 header a:hover {
-    color: #00ff41;
+    color: #41d2ec;
 }
 
 header {
@@ -146,15 +146,16 @@ main > .content-form .cart-item
 }
 .product  .photo > img
 {
-    width: 33%;
+    height: 150px;
+    /*width: ;*/
     cursor: pointer;
-    border: solid 1px #ccc;
+    /*border: solid 1px #ccc;*/
 }
 
 .product .price
 {
     font-weight: 900;
-    color: #00ff41;
+    color: #41d2ec;
 }
 
 .modal-body img

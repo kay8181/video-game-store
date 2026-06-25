@@ -2,25 +2,25 @@
   <!-- Define styles -->
   <style>
     .easy-text {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family:  "Rockwell";
       font-size: 90px;
       font-weight: 700;
       fill: #ffffff;
       letter-spacing: -6px;
-      text-shadow: 0 0 10px #00ff41;
+      text-shadow: 0 0 10px #41d2ec;
     }
     .shop-text {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: "Brush Script MT", cursive;
       font-size: 40px;
       font-weight: 300;
-      fill: #00ff41;
-      letter-spacing: 18px;
+      fill: #41d2ec;
+      letter-spacing: 4x;
     }
   </style>
   
   <!-- "videogame" text -->
-  <text x="10" y="110" class="easy-text">videogame</text>
+  <text x="10" y="110" class="easy-text">BearGames</text>
   
   <!-- "store" text -->
-  <text x="28" y="160" class="shop-text">store</text>
+  <text x="28" y="160" class="shop-text"></text>
 </svg>
