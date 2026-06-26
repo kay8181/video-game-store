@@ -13,6 +13,8 @@ public class ECommerceApplication
             String bannerResource = "classpath:banner-" + dbName.toLowerCase() + ".txt";
             System.setProperty("spring.banner.location", bannerResource);
         }
+        String bannerResource = "classpath:banner-videogamestore.txt";
+        System.setProperty("spring.banner.location", bannerResource);
         SpringApplication.run(ECommerceApplication.class, args);
     }
 
