@@ -3,7 +3,7 @@
   <style>
     .easy-text {
       font-family:  "Rockwell";
-      font-size: 90px;
+      font-size: 100px;
       font-weight: 700;
       fill: #ffffff;
       letter-spacing: -6px;
@@ -19,7 +19,7 @@
   </style>
   
   <!-- "videogame" text -->
-  <text x="10" y="110" class="easy-text">BearGames</text>
+  <text x="10" y="120" class="easy-text">BearGames</text>
   
   <!-- "store" text -->
   <text x="28" y="160" class="shop-text"></text>
