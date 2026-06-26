@@ -1,6 +1,7 @@
 package org.yearup.service;
 
 import jakarta.persistence.Column;
+import jakarta.transaction.Transactional;
 import org.springframework.data.web.config.SpringDataWebSettings;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.parameters.P;
@@ -51,11 +52,6 @@ public class ShoppingCartService
 
     // add additional methods here
 
-//    public ShoppingCart create(ShoppingCart shoppingCart)
-//    {
-//        return shoppingCartRepository.save(shoppingCart);
-//    }
-
     public ShoppingCart addToCart(ShoppingCart cart, int productId, int userId)
     {
         Product product = productService.getById(productId);
@@ -69,11 +65,7 @@ public class ShoppingCartService
 
         if (existingItem != null) {
             int existingQuantity = existingItem.getQuantity();
-//            System.out.println("\n\nEXISTING QUANTITY: ");
-//            System.out.println(existingQuantity);
             int newQuantity = existingQuantity + 1;
-//            System.out.println("\n\nNEW QUANTITY: ");
-//            System.out.println(newQuantity);
             existingItem.setQuantity(newQuantity);
             shoppingCartItem.setQuantity(newQuantity);
             shoppingCartRepository.save(existingItem);
@@ -102,12 +94,11 @@ public class ShoppingCartService
         return cart;
     }
 
-    public ShoppingCart deleteCart(int userId) {
+    @Transactional
+    public void deleteCart(int userId) {
 
         shoppingCartRepository.deleteByUserId(userId);
 
-        ShoppingCart cart = new ShoppingCart();
-
-        return cart;
     }
 }
+

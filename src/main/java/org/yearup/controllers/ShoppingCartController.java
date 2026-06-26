@@ -59,14 +59,12 @@ public class ShoppingCartController
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         String userName = principal.getName();
-        // find database user by username
         User user = userService.getByUserName(userName);
         int userId = user.getId();
 
         ShoppingCart cart = getCart(principal);
         ShoppingCart saved = shoppingCartService.addToCart(cart, id, userId);
 
-//        return shoppingCartService.addToCart(shoppingCart, id);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
@@ -76,16 +74,19 @@ public class ShoppingCartController
     // the BODY should be a ShoppingCartItem - quantity is the only value that will be updated; return the cart (200 OK)
     @PutMapping("/products/{id}")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public ShoppingCart updateItemInCart(Principal principal, @PathVariable int id, @RequestBody ShoppingCartItem shoppingCartItem, ShoppingCart shoppingCart, int quantity)
+    public ShoppingCart updateItemInCart(Principal principal, @PathVariable int id, @RequestBody ShoppingCartItem shoppingCartItem, ShoppingCart shoppingCart)
     {
-        shoppingCart = getCart(principal);
+
         if (productService.getById(id) == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
-        if (shoppingCart.get(id) == null)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        String userName = principal.getName();
+        // find database user by username
+        User user = userService.getByUserName(userName);
+        int userId = user.getId();
 
-        ShoppingCart cart =  shoppingCartService.updateItemInCart(id, shoppingCart, quantity);
+        ShoppingCart cart = getCart(principal);
+        ShoppingCart saved = shoppingCartService.updateItemInCart(id, cart, shoppingCartItem.getQuantity());
         shoppingCartItem =  cart.get(id);
 
         return cart;
@@ -96,18 +97,16 @@ public class ShoppingCartController
     // https://localhost:8080/cart  - return the (now empty) cart so the front end can refresh it (200 OK)
     @DeleteMapping("")
     @PreAuthorize("hasRole('ROLE_USER')")
-//    @PreAuthorize("hasRole('USER')")
-//    public ShoppingCart deleteCart(Principal principal, @RequestBody ShoppingCart shoppingCart)
-    public ResponseEntity<ShoppingCart> deleteCart(Principal principal, @RequestBody ShoppingCart ignoredBody)
+    public ResponseEntity<ShoppingCart> deleteCart(Principal principal, @RequestBody(required = false) ShoppingCart ignoredBody)
     {
         String userName = principal.getName();
         User user = userService.getByUserName(userName);
         int userId = user.getId();
 
-        ShoppingCart cart = getCart(principal);
-        ShoppingCart saved = shoppingCartService.deleteCart(userId);
+        shoppingCartService.deleteCart(userId);
+        ShoppingCart cart = new ShoppingCart();
 
-        return ResponseEntity.status(HttpStatus.OK).body(saved);
+        return ResponseEntity.status(HttpStatus.OK).body(cart);
     }
 
 }
